@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="card card-container">
+        <!--<span id="reauth-email" class="reauth-email">Login</span>-->
+        <!--<img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" />-->
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
+
+        <p id="profile-name" class="profile-name-card"></p>
+
+        <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="inputEmail" ng-model="loginData.email" class="form-control" placeholder="Email address" required autofocus>
+            <input type="password" id="inputPassword" ng-model="loginData.password" class="form-control" placeholder="Password" required>
+
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button id="sign-in-btn" class="btn btn-lg btn-primary btn-block btn-signin" type="submit" ng-click="submitLogin()">Sign in</button>
+        </form>
+        <!-- /form -->
+        <a href="#" class="forgot-password">
+            Forgot the password? FUCK YOU.
+        </a>
+        <p>Still don't have an account? <a ng-href="#/register">Register Here</a></p>
+        <!--Preguntar perque el link no va, no te visibilitat??-->
+    </div>
+    <!-- /card-container -->
+</div>
