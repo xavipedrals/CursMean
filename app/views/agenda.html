@@ -1,9 +1,12 @@
 <div class="row">
     <div class="col-md-6 col-lg-6">
-        <tabset vertical="true" type="pills">
-            <tab heading="Vertical 1"></tab>
-            <tab heading="Vertical 2"></tab>
+      <h3>Agendes disponibles:</h3>
+      <tabset vertical="true" type="pills">
+            <tab ng-repeat="agenda in agendesData" heading="{{agenda.name}}">
+            </tab>
+            <!--<tab heading="Vertical 2"></tab>-->
         </tabset>
+      <!--<div ng-repeat="thing in agendesData"><p>{{thing.name}}</p></div>-->
     </div>
 
     <div class="col-md-6 col-lg-6">
@@ -12,18 +15,18 @@
                 <h3 class="panel-title">Create agenda</h3>
             </div>
             <div class="panel-body">
-                <form name="createContact" novalidate>
+                <form name="createAgenda" novalidate>
                     <div class="form-group"
-                         ng-class="{'has-error': createContact.name.$dirty && createContact.name.$invalid}">
+                         ng-class="{'has-error': createAgenda.name.$dirty && createAgenda.name.$invalid}">
                         <label for="name">Name</label>
-                        <input type="text" ng-model="createContactData.name" required class="form-control"
+                        <input type="text" ng-model="createAgendaData.name" required class="form-control"
                                placeholder="Name" name="name" id="name">
                         <!--<ng-messages for="createContact.name.$error" class="text-danger" ng-if="createContact.name.$dirty">-->
                         <!--<ng-message when="required">This field is required</ng-message>-->
                         <!--</ng-messages>-->
                     </div>
                     <div>
-                        <button class="btn btn-success btn-large pull-right" ng-disabled="createContact.$invalid"
+                        <button class="btn btn-success btn-large pull-right" ng-disabled="createAgenda.$invalid"
                                 ng-click="createAgendaCon()">Create agenda
                         </button>
                     </div>
