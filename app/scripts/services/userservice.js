@@ -20,9 +20,9 @@ function UserService($http, $window, $q) {
         return q.promise;
     }
 
-    //function getUser() {
-    //  return user;
-    //}
+    function getUser() {
+      return user;
+    }
 
     return {
       createUser: createUser

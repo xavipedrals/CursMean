@@ -8,15 +8,24 @@
  * Controller of the yoRasoApp
  */
 angular.module('yoRasoApp')
-    .controller('ContactesCtrl', function ($scope, contactService) {
-        $scope.createContactData = {};
+  .controller('ContactesCtrl', function ($scope, contactService, $route) {
+    $scope.createContactData = {};
+    $scope.contactesData = {};
 
-        $scope.createContactCon = function () {
-            contactService.createContact($scope.createContactData.name, $scope.createContactData.surname,
-                $scope.createContactData.company, $scope.createContactData.phone, "agendaAux").then(function () {
-                    console.log('SUCCESS');
-                }, function () {
-                    console.log('FAILED');
-                });
-        };
+    contactService.getAgendaContacts("prova").then(function(data){
+      console.log('SUCCES');
+      $scope.contactesData = data.data;
+    }, function () {
+      console.log('FAILED');
     });
+
+    $scope.createContactCon = function () {
+      contactService.createContact($scope.createContactData.name, $scope.createContactData.surname,
+        $scope.createContactData.company, $scope.createContactData.phone, "prova").then(function () {
+          console.log('SUCCESS');
+          $route.reload();
+        }, function () {
+          console.log('FAILED');
+        });
+    };
+  });

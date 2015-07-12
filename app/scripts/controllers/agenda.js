@@ -20,10 +20,4 @@ angular.module('yoRasoApp')
         console.log('FAILED');
       });
     };
-
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 });
