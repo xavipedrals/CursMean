@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('yoRasoApp')
-  .controller('AgendaCtrl', function ($scope, AgendaService, $route) {
+  .controller('AgendaCtrl', function ($scope, AgendaService, contactService, $route, $location) {
     $scope.createAgendaData = {};
     $scope.agendesData = {};
 
@@ -20,4 +20,11 @@ angular.module('yoRasoApp')
         console.log('FAILED');
       });
     };
+
+    $scope.selectAgenda = function (agenda){
+      var agendaName = agenda.name;
+      console.log(agendaName);
+      contactService.setAgenda(agendaName);
+      $location.url('/contactes');
+    }
 });
