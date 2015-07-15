@@ -32,8 +32,22 @@ function AgendaService($http, $q) {
     return q.promise;
   }
 
+  function deleteAgenda(name){
+    var q = $q.defer();
+    console.log(name);
+    $http.put(SERVER_URL, {name: name}).then(function (data) {
+      console.log(data);
+      q.resolve(data);
+    }, function (){
+      console.log('FAIL');
+      q.reject();
+    });
+    return q.promise;
+  }
+
   return{
     createAgenda:createAgenda,
-    getAgendes: getAgendes
+    getAgendes: getAgendes,
+    deleteAgenda: deleteAgenda
   };
 }

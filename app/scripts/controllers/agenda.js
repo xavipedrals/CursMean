@@ -4,6 +4,7 @@ angular.module('yoRasoApp')
   .controller('AgendaCtrl', function ($scope, AgendaService, contactService, $route, $location, AuthService) {
     $scope.createAgendaData = {};
     $scope.agendesData = {};
+    $scope.deleteAgendaData = {};
 
     $scope.user = AuthService.getUser();
 
@@ -32,5 +33,14 @@ angular.module('yoRasoApp')
         contactService.setAgenda(agendaName);
         $location.url('/contactes');
       };
+
+      $scope.deleteAgendaCon = function () {
+        AgendaService.deleteAgenda($scope.deleteAgendaData.name).then(function() {
+          console.log('SUCCESS');
+          $route.reload();
+        }, function () {
+          console.log('FAILURE');
+        });
+      }
     }
 });

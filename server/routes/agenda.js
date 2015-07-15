@@ -37,21 +37,14 @@ agendaRouter.post('/', express_jwt({secret: jwt_secret}), function (req, res) {
   });
 });
 
-agendaRouter.put('/', function (req, res) {
+agendaRouter.put('/', express_jwt({secret: jwt_secret}), function (req, res) {
   console.log('DELETE AGENDA');
   var name = req.body.name;
-  Agenda.findOrCreate({"name": name}, function (err, data) {
+  var ownerID = new ObjectId(req.user._id);
+  Agenda.remove({"name": name, "owner": ownerID}, function (err) {
     if (err) throw err;
     else {
-      //res.status(200).send(data);
-      console.log(data._id);
-      var agendaID = new ObjectId(data._id);
-      Agenda.remove({"_id": agendaID}, function (err) {
-        if (err) res.status(500).send("Error al borrar");
-        else {
-          res.status(200).send("Delete correcte");
-        }
-      });
+      res.status(200).send("Delete correcte");
     }
   });
 });
