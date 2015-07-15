@@ -26,6 +26,19 @@ angular.module('yoRasoApp')
       return q.promise;
     }
 
+    function deleteContact(name, surname){
+      var q = $q.defer();
+      console.log(name, surname, agenda);
+      $http.put(SERVER_URL, {name: name, surname: surname, agenda: agenda}).then(function (data) {
+        console.log(data);
+        q.resolve(data);
+      }, function (){
+        console.log('FAIL');
+        q.reject();
+      });
+        return q.promise;
+    }
+
     function getAgendaContacts(){
       var q = $q.defer();
       var SERVER_URL_COMPLETE = SERVER_URL + agenda;
@@ -41,12 +54,18 @@ angular.module('yoRasoApp')
     }
 
     function setAgenda(data) {
-      return agenda = data;
+      agenda = data;
+    }
+
+    function getAgenda(){
+      return agenda;
     }
 
     return {
       createContact: createContact,
       getAgendaContacts: getAgendaContacts,
-      setAgenda: setAgenda
+      setAgenda: setAgenda,
+      getAgenda: getAgenda,
+      deleteContact: deleteContact
     };
   });

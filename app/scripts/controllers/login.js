@@ -14,7 +14,7 @@ angular.module('yoRasoApp')
 
         $scope.submitLogin = function () {
             AuthService.login($scope.loginData.email, $scope.loginData.password).then(function () {
-                $location.url('/register');
+                $location.url('/agenda');
                 console.log('SUCCES');
             }, function () {
                 console.log('FAILED');

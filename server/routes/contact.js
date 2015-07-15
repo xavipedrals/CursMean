@@ -11,18 +11,9 @@ var ObjectId = require('mongoose').Types.ObjectId;
  * Function to retrieve all the users in the database.
  * Restricted only to admin users.
  */
-//contactRouter.get('/', express_jwt({secret: jwt_secret}), function (req, res) {
-//    var owner = new ObjectId(req.user._id);
-//    var agenda = new ObjectId(req.body.agenda);
-//    Contact.find({"owner": owner, "agenda": agenda}, function(err, contacts){
-//        if (err) throw err;
-//        else{
-//            res.status(200).send(contacts);
-//        }
-//    });
-//});
 
 contactRouter.get('/:agenda', express_jwt({secret: jwt_secret}), function (req, res) {
+  console.log('GET CONTACTE');
   var owner = new ObjectId(req.user._id);
   var agenda = req.params.agenda;
   console.log(agenda);
@@ -45,6 +36,7 @@ contactRouter.get('/:agenda', express_jwt({secret: jwt_secret}), function (req, 
 });
 
 contactRouter.post('/', express_jwt({secret: jwt_secret}), function (req, res) {
+  console.log('CREATE CONTACTE');
   var ownerID = new ObjectId(req.user._id);
   var agenda = req.body.agenda;
   var agendaID = null;
@@ -68,6 +60,32 @@ contactRouter.post('/', express_jwt({secret: jwt_secret}), function (req, res) {
         if (err) throw err;
         else {
           res.status(200).json(contact);
+        }
+      });
+    }
+  });
+});
+
+//Des de angular no deixa posar body a una petició delete, he hagut de fer servir el put per poder accedir al body
+contactRouter.put('/',express_jwt({secret: jwt_secret}), function (req, res) {
+  var ownerID = new ObjectId(req.user._id);
+  var name = req.body.name;
+  var surname = req.body.surname;
+  var agenda = req.body.agenda;
+  console.log(ownerID);
+  console.log(req.body.name);
+  console.log(surname);
+  console.log(agenda);
+  Agenda.findOrCreate({"name": agenda, "owner": ownerID}, function (err, data) {
+    if (err) throw err;
+    else {
+      console.log(data._id);
+      var agendaID = new ObjectId(data._id);
+
+      Contact.remove({"name": name, "surname": surname, "agenda": agendaID, "owner": ownerID}, function (err) {
+        if (err) res.status(500).send("Error al borrar");
+        else {
+          res.status(200).send("Delete correcte");
         }
       });
     }

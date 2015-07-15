@@ -14,7 +14,7 @@ angular.module('yoRasoApp')
         $scope.submitRegister = function () {
             UserService.createUser($scope.registerData.username, $scope.registerData.password, $scope.registerData.email).then(function () {
                 console.log('SUCCESS');
-                $location.url('/agenda');
+                $location.url('/login');
             }, function () {
                 console.log('FAILED');
             });

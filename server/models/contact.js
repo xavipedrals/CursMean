@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var findOrCreate = require('mongoose-findorcreate');
 
 /**
  * Function to define the model of an user.
@@ -16,7 +17,7 @@ module.exports = function() {
         telephone: Number,
         agenda: {type: Schema.Types.ObjectId, Ref: "Agenda"},
         owner: {type: Schema.Types.ObjectId, Ref: "User"}
-    });
+    }).plugin(findOrCreate);
 
     mongoose.model('Contact', contactSchema, 'contacts');
 };
